@@ -1,5 +1,19 @@
 ## Coding Challenge
 
+### The Solution
+
+This project offers user-authenticated creation of value accounts and transaction of value between them.
+Access is strictly limited to only relevant user.
+
+Service is interacted with through:
+* `POST: /banking/account` - Create account
+* `GET: /banking/account` - List all accounts of user
+* `POST: /banking/transaction/transfer` - Transfer money between accounts
+* `GET: /banking/transaction/audit/<user_id>` Get all transactions user is involved in
+
+We don't expose a way to create a user, only do it through tests as use-creation is a bit out of scope
+and would be handled in another service anyway :D
+
 ### Auditing
 
 For auditing beyond just listing transactions of a user, we need a more fine-grained
@@ -33,6 +47,10 @@ The DB-tables should have appropriate indexes beyond just PK/FKs.
 Which, obviously depends on (future) usage.
 
 Don't do work/IO on "UI"-thread. Should be offloaded to appropriate handler.
+
+### Testing
+
+As the service is critical, this is pretty heavily tested. All happy-paths and expected exceptions are tested.
 
 ### Deployment
 

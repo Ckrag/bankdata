@@ -32,6 +32,8 @@ public class TransactionController {
 
     @Get("/audit/{userId}")
     public TransactionAuditResponse audit(Authentication authentication, @PathVariable Long userId) {
+        // Currently a bit silly as the user provided is also the user requesting
+        // but in future the user requesting could be "type admin", and differ from provided ID.
         UserDto user = userService.getAuthorizedUser(authentication);
         List<TransactionResponse> transactions = transactionService.audit(user, userId)
                 .stream()
