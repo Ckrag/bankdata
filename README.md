@@ -28,6 +28,13 @@ Which, obviously depends on (future) usage.
 
 Don't do work/IO on "UI"-thread. Should be offloaded to appropriate handler.
 
+### Deployment
+
+Deploying this: I would just SSH to my server and run the docker-compose 
+1. SSH to server
+2. Run docker compose as daemon
+3. Setup Nginx reverse-proxy to forward requests to docker
+
 ## Development
 
 ### jOOQ Code Generation
