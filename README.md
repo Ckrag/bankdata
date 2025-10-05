@@ -7,6 +7,7 @@ permission system to allow "admin" and "users", as the current audit route is "s
 for the user itself.
 Additionally, as auditing/audit-generation can be he heavy, it is likely to be a more async operation
 through jobs and queuing.
+To surface data and manage alarms I would use Grafana.
 
 ### Observability
 
