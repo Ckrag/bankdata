@@ -44,7 +44,7 @@ After generating the jOOQ code, you can move the generated files to your source 
 ./move_jooq.sh
 ```
 
-## Database
+### Database
 
 To connect to the PostgreSQL database, you can use the following command, which includes the password:
 
@@ -52,7 +52,7 @@ To connect to the PostgreSQL database, you can use the following command, which 
 psql "postgresql://user:password@localhost:5432/bankdata"
 ```
 
-### Flyway Migrations
+#### Flyway Migrations
 
 To manually run the Flyway database migrations, you can use the following command:
 
