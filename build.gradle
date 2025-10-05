@@ -1,0 +1,133 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.postgresql:postgresql:42.7.8'
+        classpath 'org.flywaydb:flyway-database-postgresql:11.13.2'
+    }
+}
+
+import nu.studer.gradle.jooq.JooqEdition
+
+plugins {
+    id("groovy")
+    id("com.gradleup.shadow") version "8.3.7"
+    id("io.micronaut.aot") version "4.5.4"
+    id "nu.studer.jooq" version "10.1.1"
+    id("org.flywaydb.flyway") version "11.13.2"
+    id "io.micronaut.application" version "4.5.4"
+    id "io.micronaut.test-resources" version "4.5.4"
+}
+
+version = "0.1"
+group = "dk.ckrag"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    annotationProcessor("io.micronaut:micronaut-http-validation")
+    annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
+    annotationProcessor("io.micronaut.security:micronaut-security-annotations")
+    implementation("io.micronaut.validation:micronaut-validation")
+    annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
+    implementation("io.micronaut.serde:micronaut-serde-jackson")
+    implementation("io.micronaut.flyway:micronaut-flyway")
+    implementation("io.micronaut.sql:micronaut-jooq:6.2.1")
+    implementation("io.micronaut.security:micronaut-security-jwt")
+    compileOnly("io.micronaut:micronaut-http-client")
+    runtimeOnly("ch.qos.logback:logback-classic")
+    runtimeOnly("org.yaml:snakeyaml")
+
+    jooqGenerator("org.postgresql:postgresql:42.7.8")
+
+    testImplementation(platform("org.testcontainers:testcontainers-bom:1.19.3"))
+    testRuntimeOnly("org.testcontainers:postgresql")
+
+    testImplementation("io.micronaut.sql:micronaut-jooq:6.2.1")
+    testImplementation("io.micronaut.sql:micronaut-jdbc-hikari")
+    testImplementation("io.micronaut:micronaut-http-client")
+    testImplementation("io.micronaut:micronaut-inject-groovy")
+    testImplementation("io.micronaut.test:micronaut-test-spock")
+    testImplementation('org.testcontainers:spock:1.17.5')
+    testImplementation("org.testcontainers:postgresql:1.17.5")
+    testImplementation("org.flywaydb:flyway-core:11.13.2")
+    testImplementation("org.flywaydb:flyway-database-postgresql:11.13.2")
+
+    implementation("io.micronaut.sql:micronaut-jooq")
+    runtimeOnly("org.postgresql:postgresql")
+    implementation("jakarta.validation:jakarta.validation-api:3.0.2")
+    implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
+}
+
+application {
+    mainClass = "dk.ckrag.Application"
+}
+java {
+    sourceCompatibility = JavaVersion.toVersion("23")
+    targetCompatibility = JavaVersion.toVersion("23")
+}
+
+graalvmNative.toolchainDetection = false
+
+micronaut {
+    runtime("netty")
+    testRuntime("spock2")
+    processing {
+        incremental(true)
+        annotations("dk.ckrag.*")
+    }
+    aot {
+        // Please review carefully the optimizations enabled below
+        // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
+        optimizeServiceLoading = false
+        convertYamlToJava = false
+        precomputeOperations = true
+        cacheEnvironment = true
+        optimizeClassLoading = true
+        deduceEnvironment = true
+        optimizeNetty = true
+        replaceLogbackXml = true
+    }
+}
+
+flyway {
+    url = 'jdbc:postgresql://0.0.0.0:5432/bankdata'
+    user = 'user'
+    password = 'password'
+}
+
+
+
+jooq {
+    version = "3.20.8"
+    edition = JooqEdition.OSS
+    configurations {
+        main {
+            generateSchemaSourceOnCompilation = false
+            generationTool {
+                jdbc {
+                    driver = "org.postgresql.Driver"
+                    url = "jdbc:postgresql://0.0.0.0:5432/bankdata" // We only run the command in dev mode anyway to build artifacts
+                    user = "user"
+                    password = "password"
+                }
+                generator {
+                    database {
+                        name = "org.jooq.meta.postgres.PostgresDatabase"
+                        includes = ".*"
+                        excludes = "flyway_schema_history"
+                        inputSchema = "public"
+                    }
+                    target {
+                        packageName = "dk.ckrag.jooq"
+                        directory = "build/generated/jooq"
+                    }
+                }
+            }
+        }
+    }
+}
+
