@@ -18,6 +18,11 @@ The database also has a health-check that just asserts responsiveness.
 In production you would also add alerts for exceptions in the application log
 as well as graph avg/mean response-times and general DB load and a log showing slowest SQL queries.
 
+### Security
+
+Currently it uses a simple JWT token with no user password. In a real production environment
+you would naturally integrate with a shared auth service.
+
 ### Coding standard
 
 A lint check should exist in the project that matches the company-agreed coding style.
