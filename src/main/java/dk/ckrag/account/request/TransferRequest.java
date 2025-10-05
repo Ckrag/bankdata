@@ -6,9 +6,9 @@ import io.micronaut.serde.annotation.Serdeable;
 @Serdeable
 @Introspected
 public class TransferRequest {
-    private Long fromAccountId;
-    private Long toAccountId;
-    private Integer amount;
+    private final Long fromAccountId;
+    private final Long toAccountId;
+    private final Integer amount;
 
     public TransferRequest(Long fromAccountId, Long toAccountId, Integer amount) {
         this.fromAccountId = fromAccountId;
@@ -20,23 +20,12 @@ public class TransferRequest {
         return fromAccountId;
     }
 
-    public void setFromAccountId(Long fromAccountId) {
-        this.fromAccountId = fromAccountId;
-    }
-
     public Long getToAccountId() {
         return toAccountId;
-    }
-
-    public void setToAccountId(Long toAccountId) {
-        this.toAccountId = toAccountId;
     }
 
     public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
 }

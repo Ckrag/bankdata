@@ -21,6 +21,13 @@ as well as graph avg/mean response-times and general DB load and a log showing s
 
 A lint check should exist in the project that matches the company-agreed coding style.
 
+### Optimizations
+
+The DB-tables should have appropriate indexes beyond just PK/FKs.
+Which, obviously depends on (future) usage.
+
+Don't do work/IO on "UI"-thread. Should be offloaded to appropriate handler.
+
 ## Development
 
 ### jOOQ Code Generation

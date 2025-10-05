@@ -9,7 +9,7 @@ import java.util.List;
 @Serdeable
 @Introspected
 public class TransactionAuditResponse {
-    private List<TransactionResponse> transactions;
+    private final List<TransactionResponse> transactions;
 
     public TransactionAuditResponse(List<TransactionResponse> transactions) {
         this.transactions = transactions;
@@ -17,9 +17,5 @@ public class TransactionAuditResponse {
 
     public List<TransactionResponse> getTransactions() {
         return transactions;
-    }
-
-    public void setTransactions(List<TransactionResponse> transactions) {
-        this.transactions = transactions;
     }
 }

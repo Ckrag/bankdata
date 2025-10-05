@@ -8,7 +8,7 @@ import java.util.List;
 @Serdeable
 @Introspected
 public class AccountListResponse {
-    private List<AccountResponse> accounts;
+    private final List<AccountResponse> accounts;
 
     public AccountListResponse(List<AccountResponse> accounts) {
         this.accounts = accounts;
@@ -16,9 +16,5 @@ public class AccountListResponse {
 
     public List<AccountResponse> getAccounts() {
         return accounts;
-    }
-
-    public void setAccounts(List<AccountResponse> accounts) {
-        this.accounts = accounts;
     }
 }

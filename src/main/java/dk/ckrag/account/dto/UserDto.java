@@ -4,8 +4,8 @@ import io.micronaut.core.annotation.Introspected;
 
 @Introspected
 public class UserDto {
-    private Long id;
-    private String name;
+    private final Long id;
+    private final String name;
 
     public UserDto(Long id, String name) {
         this.id = id;
@@ -16,15 +16,8 @@ public class UserDto {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 }

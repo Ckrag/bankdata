@@ -10,7 +10,7 @@ import jakarta.validation.constraints.Min;
 @Serdeable
 public class CreateAccountRequest {
     @Min(0)
-    private Integer initialAmount;
+    private final Integer initialAmount;
 
     public CreateAccountRequest(Integer initialAmount) {
         this.initialAmount = initialAmount;
@@ -18,9 +18,5 @@ public class CreateAccountRequest {
 
     public Integer getInitialAmount() {
         return initialAmount;
-    }
-
-    public void setInitialAmount(Integer initialAmount) {
-        this.initialAmount = initialAmount;
     }
 }

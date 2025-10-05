@@ -31,7 +31,6 @@ class TransactionControllerSpec extends RepoSpecification {
     String authToken
 
     def setup() {
-        // Create unique user for each test to avoid duplicates
         String uniqueUserName = "Test User " + System.currentTimeMillis()
         testUser = userRepository.create(uniqueUserName)
 

@@ -7,11 +7,11 @@ import java.time.OffsetDateTime;
 @Serdeable
 @Introspected
 public class TransactionResponse {
-    private Long id;
-    private Long fromAccountId;
-    private Long toAccountId;
-    private Integer amount;
-    private OffsetDateTime createdAt;
+    private final Long id;
+    private final Long fromAccountId;
+    private final Long toAccountId;
+    private final Integer amount;
+    private final OffsetDateTime createdAt;
 
     public TransactionResponse(Long id, Long fromAccountId, Long toAccountId, Integer amount, OffsetDateTime createdAt) {
         this.id = id;
@@ -21,44 +21,8 @@ public class TransactionResponse {
         this.createdAt = createdAt;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getFromAccountId() {
-        return fromAccountId;
-    }
-
-    public void setFromAccountId(Long fromAccountId) {
-        this.fromAccountId = fromAccountId;
-    }
-
-    public Long getToAccountId() {
-        return toAccountId;
-    }
-
-    public void setToAccountId(Long toAccountId) {
-        this.toAccountId = toAccountId;
-    }
-
     public Integer getAmount() {
         return amount;
-    }
-
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
-
-    public OffsetDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(OffsetDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 
     public static TransactionResponse fromDto(dk.ckrag.account.dto.TransactionDto dto) {
