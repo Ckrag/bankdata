@@ -59,6 +59,11 @@ Deploying this: I would just SSH to my server and run the docker-compose
 2. Run docker compose as daemon
 3. Setup Nginx reverse-proxy to forward requests to docker
 
+### Logging
+
+Each controller should log an info message like `logger.info("transfor assets from account ID XYZ to ZYX")` and `logger.info("listed accounts for user XYZ")`.
+Good "breadcrumbs" help a lot in debugging, and not having to rely on mapping Nginx/routing logs to application logs, and helps log and track use patterns.
+
 ## Development
 
 ### jOOQ Code Generation
